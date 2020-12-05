@@ -1,7 +1,5 @@
 name: "Test Swift package"
-on: 
-  push
-  pull_request
+on:
   issues:
     types: [opened, edited, closed, deleted]
 jobs:
