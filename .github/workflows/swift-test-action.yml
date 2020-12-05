@@ -6,7 +6,7 @@ on:
   issues:
     types: [opened, edited, closed, deleted]
 jobs:
-  test-swift-5.3:
+  test-swift-5-3:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker://swift:5.3
       - run: swift test --parallel
+
   test-swift-latest:
     runs-on: ${{ matrix.os }}
     strategy:
