@@ -3,7 +3,7 @@ on:
   push
   pull_request
   issues:
-    [opened, edited, closed, deleted]
+    types: [opened, edited, closed, deleted]
 jobs:
   test-swift-package:
     runs-on: ${{ matrix.os }}
