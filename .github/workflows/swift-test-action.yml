@@ -11,10 +11,15 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-16.04, ubuntu-18.04, ubuntu-latest]
-        swift_ver: [5.1, 5.2, 5.3, latest, bionic]
+        swift_ver: [5.3, 5.2]
     steps:
       - uses: actions/checkout@v2
-      - uses: docker://swift:${{ matrix.swift_ver }}
-      - run: swift --version
-      - run: swift build
-      - run: swift test
+      - uses: docker://swift:$SWIFT_VER
+        env:
+          SWIFT_VER: ${{ matrix.swift_ver }}
+      - name: Swift version
+        run: swift --version
+      - name: Build
+        run: swift build
+      - name: Test
+        run: swift test
