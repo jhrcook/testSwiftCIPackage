@@ -1,11 +1,15 @@
 name: "Test Swift package"
-on: [push, pull_request]
+on: 
+  push
+  pull_request
+  issues:
+    [opened, edited, closed, deleted]
 jobs:
   test-swift-package:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-latest]
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: docker://swift:5.3
