@@ -6,20 +6,21 @@ on:
   issues:
     types: [opened, edited, closed, deleted]
 jobs:
-  test-swift-package:
+  test-swift-5.3:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-latest]
-        swift_ver: [5.3, 5.2]
+        os: [ubuntu-latest, macos-latest]
     steps:
       - uses: actions/checkout@v2
-      - uses: docker://swift:$SWIFT_VER
-        env:
-          SWIFT_VER: ${{ matrix.swift_ver }}
-      - name: Swift version
-        run: swift --version
-      - name: Build
-        run: swift build
-      - name: Test
-        run: swift test
+      - uses: docker://swift:5.3
+      - run: swift test --parallel
+  test-swift-latest:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://swift:latest
+      - run: swift test --parallel
